@@ -7,7 +7,7 @@ app.use(cors());
 app.use(bodyParser.json()); 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Sharkeisha quan is absolutely trolling and doxing herself XDXD')
 })
 
 app.get('/hello', (req, res) => {
