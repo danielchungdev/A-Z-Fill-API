@@ -17,5 +17,5 @@ app.get('/hello', (req, res) => {
 const PORT = process.env.PORT || 8081
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+  console.log(`Example app listening on port ${port}`)
 })
