@@ -1,20 +1,23 @@
 const express = require('express')
 const app = express()
+const PORT = process.env.PORT || 8081
 const cors = require('cors');
 const bodyParser = require('body-parser'); 
+const conn = require('./dbconn/dbconn')
 
 app.use(cors());
 app.use(bodyParser.json()); 
 
 app.get('/', (req, res) => {
-  res.send('Sharkeisha quan is absolutely trolling and doxing herself XDXD')
+  res.send('A to Z api')
 })
 
-app.get('/hello', (req, res) => {
-    res.json({message: 'Hello World'})
+app.get('/testdb', (req, res) => {
+	conn.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+		if (error) throw error;
+		console.log('The solution is: ', results[0].solution);
+	});
 })
-
-const PORT = process.env.PORT || 8081
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
