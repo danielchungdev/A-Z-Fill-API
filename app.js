@@ -13,11 +13,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/testdb', (req, res) => {
-	conn.query('SELECT * from matchhistory',function (error, results, fields){
-		if (error){
-			throw error;
-		}
-		res.send(results);
+	conn.query('SELECT * from matchhistory', function (error, results, fields) {
+		if (error) throw error;
+		console.log('The solution is: ', results[0].solution);
 	});
 })
 
