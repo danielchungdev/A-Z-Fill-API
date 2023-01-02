@@ -18,4 +18,4 @@ const conn = mysql.createConnection({
 
 conn.connect()
   
-module.exports = conn
+module.exports = { conn }
