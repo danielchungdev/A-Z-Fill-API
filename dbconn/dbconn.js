@@ -8,8 +8,6 @@ const conn = mysql.createConnection({
 	database: 'azfill'
 })
 
-console.log(process.env.USER)
-
 // const conn = mysql.createConnection({
 // 	host: process.env.HOST,
 // 	user: process.env.USER,
