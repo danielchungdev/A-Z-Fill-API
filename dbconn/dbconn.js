@@ -1,6 +1,6 @@
 const mysql = require('mysql2')
 
-const conn = mysql.createConnection({
+const pool = mysql.createPool({
 	host: "az-db.c2irzkybqtvy.us-east-1.rds.amazonaws.com",
 	user: "root",
 	password: "testpassword",
@@ -15,7 +15,5 @@ const conn = mysql.createConnection({
 // 	port: process.env.PORT,
 // 	database: process.env.DATABASE
 // })
-
-conn.connect()
   
-module.exports = conn 
+module.exports = pool 
