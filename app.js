@@ -54,8 +54,8 @@ app.get('/mostplayedposition', (req, res) => {
 })
 
 app.get('/champion/:championid', (req, res) => {
-	let {championid} = req.query.championid
-	pool.query(`SELECT * FROM matchhistory WHERE champion = ${championid}`, (error, results, fields) => {
+	let championid = req.params.championid
+	pool.query(`SELECT * FROM matchhistory WHERE champion = '${championid}'`, (error, results, fields) => {
     if (error) throw error
     let data = results
     res.send(data)
@@ -65,7 +65,7 @@ app.get('/champion/:championid', (req, res) => {
 app.post('/insertgame', (req, res) => {
 
 	conn.query (`INSERT INTO matchhistory (matchid, champion)`,(error, results, fields) => {
-    
+		
 	})
 	res.send({})
 })
