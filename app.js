@@ -42,7 +42,6 @@ app.get('/totalstats', (req, res) => {
 })
 
 app.get('/mostplayedposition', (req, res) => {
-
 	pool.query(`SELECT position, COUNT(position) as 'count' FROM matchhistory GROUP BY position ORDER BY 'count' DESC LIMIT 1`, (error, results, fields) => {
 		if (error) throw error
 		let data = results[0]
@@ -52,22 +51,21 @@ app.get('/mostplayedposition', (req, res) => {
 		}
 		res.send(returnObject)
 	})
-
 })
 
 app.get('/champion/:championid', (req, res) => {
-	
-	pool.query(``, (error, results, fields) => {
-
+	let {championid} = req.query.championid
+	pool.query(`SELECT * FROM matchhistory WHERE champion = ${championid}`, (error, results, fields) => {
+    if (error) throw error
+    let data = results
+    res.send(data)
 	})
-	
-	res.send({})
 })
 
 app.post('/insertgame', (req, res) => {
 
-	conn.query ('',(error, results, fields) => {
-
+	conn.query (`INSERT INTO matchhistory (matchid, champion)`,(error, results, fields) => {
+    
 	})
 	res.send({})
 })
