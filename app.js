@@ -74,7 +74,6 @@ app.get('/', (req, res) => {
 // 		return res.send({"message": "You're not authorize to use this API route"})
 // 	}
 
-// 	const apikey = "RGAPI-06cf436b-3a3f-467d-bdc8-69016b3df391"
 
 // 	const { championName, individualPosition, kills, deaths, assists, win } = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_${matchid}?api_key=${apikey}`)
 // 		.then( response =>  {
