@@ -65,41 +65,41 @@ app.get('/champion/:championid', (req, res) => {
 	})
 })
 
-app.post('/insertgame', async (req, res) => {
-	const { matchid, auth } = req.body
+// app.post('/insertgame', async (req, res) => {
+// 	const { matchid, auth } = req.body
 
-	const counterAuth = process.env.AUTH
+// 	const counterAuth = process.env.AUTH
 
-	if (auth !== "130posnrJAO$2945"){
-		return res.send({"message": "You're not authorize to use this API route"})
-	}
+// 	if (auth !== "130posnrJAO$2945"){
+// 		return res.send({"message": "You're not authorize to use this API route"})
+// 	}
 
-	const apikey = "RGAPI-06cf436b-3a3f-467d-bdc8-69016b3df391"
+// 	const apikey = "RGAPI-06cf436b-3a3f-467d-bdc8-69016b3df391"
 
-	const { championName, individualPosition, kills, deaths, assists, win } = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_${matchid}?api_key=${apikey}`)
-		.then( response =>  {
-			response = response.data.info.participants
-			let user;
-			for (let i = 0; i < response.length; i++){
-				if ( response[i].summonerName === 'Shapeless'){
-					user = response[i]
-					break;
-				}
-			}
-			return user
-		})
-		.catch( (error) => {
-			console.log(error)
-		})
+// 	const { championName, individualPosition, kills, deaths, assists, win } = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_${matchid}?api_key=${apikey}`)
+// 		.then( response =>  {
+// 			response = response.data.info.participants
+// 			let user;
+// 			for (let i = 0; i < response.length; i++){
+// 				if ( response[i].summonerName === 'Shapeless'){
+// 					user = response[i]
+// 					break;
+// 				}
+// 			}
+// 			return user
+// 		})
+// 		.catch( (error) => {
+// 			console.log(error)
+// 		})
 
-	pool.query (`INSERT INTO matchhistory (matchid, champion, result, position, kills, deaths, assists, screenshot) VALUES (${matchid}, '${championName}', ${determineResult(win)}, ${positionToNumber(individualPosition)}, ${kills}, ${deaths}, ${assists}, 'screenshot.aws.com')`,(error, results, fields) => {
-		if (error) throw error
-		let data = results
-		console.log(data)
-	})
+// 	pool.query (`INSERT INTO matchhistory (matchid, champion, result, position, kills, deaths, assists, screenshot) VALUES (${matchid}, '${championName}', ${determineResult(win)}, ${positionToNumber(individualPosition)}, ${kills}, ${deaths}, ${assists}, 'screenshot.aws.com')`,(error, results, fields) => {
+// 		if (error) throw error
+// 		let data = results
+// 		console.log(data)
+// 	})
 
-	res.send({message: `Inserted match with id: ${matchid}`})
-})
+// 	res.send({message: `Inserted match with id: ${matchid}`})
+// })
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
