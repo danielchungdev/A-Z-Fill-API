@@ -18,10 +18,11 @@ app.get('/', (req, res) => {
 
 app.get('/testdb', (req, res) => {
 
-	pool.query('SELECT * FROM matchhistory', (error, results, fields) => {
-		if (error) throw error
-		res.send(results);
-	});
+	pool.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
+		if (err) throw err
+		
+		console.log('The solution is: ', rows[0].solution)
+	})
 })
 
 app.get('/totalstats', (req, res) => {
