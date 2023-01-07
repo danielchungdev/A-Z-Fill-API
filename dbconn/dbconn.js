@@ -1,6 +1,7 @@
 const mysql = require('mysql2')
 
 const pool = mysql.createPool({
+	connectionLimit : 100,
 	host: "az-db.c2irzkybqtvy.us-east-1.rds.amazonaws.com",
 	user: "root",
 	password: "testpassword",
