@@ -72,7 +72,7 @@ app.get('/champion/:championid', (req, res) => {
 				loss += 1
 			}
 		})
-		let winrate = wins * 100 / wins + loss
+		let winrate = wins * 100 / (wins + loss)
 		let returnData = {
 			wins: wins,
 			loss: loss,
