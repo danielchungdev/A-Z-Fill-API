@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/testdb', (req, res) => {
-
+	
 	pool.query('SELECT * FROM matchhistory', (error, results, fields) => {
 		if (error) throw error
 		res.send(results);
