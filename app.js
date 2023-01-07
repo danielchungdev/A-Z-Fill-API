@@ -58,25 +58,21 @@ app.get('/mostplayedposition', (req, res) => {
 })
 
 app.get('/champion/:championid', (req, res) => {
-	let {championid} = req.query.championid
-	pool.query(`SELECT * FROM matchhistory WHERE champion = ${championid}`, (error, results, fields) => {
-    if (error) throw error
-    let data = results
-    res.send(data)
+	let championid = req.params.championid
+	pool.query(`SELECT * FROM matchhistory WHERE champion = '${championid}'`, (error, results, fields) => {
+		if (error) throw error
+		let data = results
+		res.send(data)
 	})
 })
 
 app.post('/insertgame', async (req, res) => {
 	const { matchid, auth } = req.body
-
 	const counterAuth = process.env.AUTH
-
+	const apikey = process.env.RIOTAPI
 	if (auth !== counterAuth){
 		return res.send({"message": "You're not authorize to use this API route"})
 	}
-
-	const apikey = process.env.RIOTAPI
-
 	const { championName, individualPosition, kills, deaths, assists, win } = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_${matchid}?api_key=${apikey}`)
 		.then( response =>  {
 			response = response.data.info.participants
@@ -92,13 +88,11 @@ app.post('/insertgame', async (req, res) => {
 		.catch( (error) => {
 			console.log(error)
 		})
-
 	pool.query (`INSERT INTO matchhistory (matchid, champion, result, position, kills, deaths, assists, screenshot) VALUES (${matchid}, '${championName}', ${determineResult(win)}, ${positionToNumber(individualPosition)}, ${kills}, ${deaths}, ${assists}, 'screenshot.aws.com')`,(error, results, fields) => {
 		if (error) throw error
 		let data = results
 		console.log(data)
 	})
-
 	res.send({message: `Inserted match with id: ${matchid}`})
 })
 
