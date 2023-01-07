@@ -3,11 +3,6 @@ const app = express()
 const PORT = process.env.PORT || 8081
 const cors = require('cors');
 const bodyParser = require('body-parser'); 
-const pool = require('./dbconn/dbconn')
-const numberToPosition = require('./functions/numberToPosition')
-const positionToNumber = require('./functions/positionToNumber')
-const axios = require('axios')
-const determineResult = require('./functions/determineResult')
 
 app.use(cors());
 app.use(bodyParser.json()); 
