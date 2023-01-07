@@ -3,7 +3,7 @@ const app = express()
 const PORT = process.env.PORT || 8081
 const cors = require('cors');
 const bodyParser = require('body-parser'); 
-const pool = require('./dbconn/dbconn')
+const conn = require('./dbconn/dbconn')
 
 
 app.use(cors());
@@ -19,7 +19,7 @@ app.get('/testdb', (req, res) => {
 	// 	if (error) throw error
 	// 	res.send(results);
 	// });
-	pool.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
+	conn.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
 		if (err) throw err
 		console.log('The solution is: ', rows[0].solution)
 	})

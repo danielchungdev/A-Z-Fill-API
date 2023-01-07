@@ -8,7 +8,7 @@ const mysql = require('mysql2')
 // 	database: 'azfill'
 // })
 
-const pool = mysql.createPool({
+const conn = mysql.createConnection({
 	host: process.env.HOST,
 	user: process.env.USER,
 	password: process.env.PASSWORD,
@@ -16,4 +16,4 @@ const pool = mysql.createPool({
 	database: process.env.DATABASE
 })
   
-module.exports = pool 
+module.exports = conn
