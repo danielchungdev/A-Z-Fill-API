@@ -3,6 +3,8 @@ const app = express()
 const PORT = process.env.PORT || 8081
 const cors = require('cors');
 const bodyParser = require('body-parser'); 
+const pool = require('./dbconn/dbconn')
+
 
 app.use(cors());
 app.use(bodyParser.json()); 
@@ -11,13 +13,13 @@ app.get('/', (req, res) => {
   res.send('A to Z api')
 })
 
-// app.get('/testdb', (req, res) => {
+app.get('/testdb', (req, res) => {
 
-// 	pool.query('SELECT * FROM matchhistory', (error, results, fields) => {
-// 		if (error) throw error
-// 		res.send(results);
-// 	});
-// })
+	pool.query('SELECT * FROM matchhistory', (error, results, fields) => {
+		if (error) throw error
+		res.send(results);
+	});
+})
 
 // app.get('/totalstats', (req, res) => {
 // 	let wins;
