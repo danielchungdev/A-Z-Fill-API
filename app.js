@@ -17,11 +17,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/testdb', (req, res) => {
-
+	console.log("here")
 	pool.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
 		if (err) throw err
 		
-		console.log('The solution is: ', rows[0].solution)
+		res.send(`The solution is: ${rows[0].solution}`)
 	})
 })
 
