@@ -62,7 +62,24 @@ app.get('/champion/:championid', (req, res) => {
 	pool.query(`SELECT * FROM matchhistory WHERE champion = '${championid}'`, (error, results, fields) => {
 		if (error) throw error
 		let data = results
-		res.send(data)
+		let wins = 0;
+		let loss = 0;
+		data.forEach( match => {
+			if ( match.result === 1 ){
+				wins += 1
+			}
+			else{
+				loss += 1
+			}
+		})
+		let winrate = wins * 100 / wins + loss
+		let returnData = {
+			wins: wins,
+			loss: loss,
+			winrate: winrate,
+			matchhistory: data
+		}
+		res.send(returnData)
 	})
 })
 
