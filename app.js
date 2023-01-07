@@ -71,11 +71,11 @@ app.post('/insertgame', async (req, res) => {
 
 	const counterAuth = process.env.AUTH
 
-	if (auth !== "130posnrJAO$2945"){
+	if (auth !== counterAuth){
 		return res.send({"message": "You're not authorize to use this API route"})
 	}
 
-	const apikey = "RGAPI-ba9ff710-4eec-47a0-8751-2785e7e1d978"
+	const apikey = process.env.RIOTAPI
 
 	const { championName, individualPosition, kills, deaths, assists, win } = await axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/NA1_${matchid}?api_key=${apikey}`)
 		.then( response =>  {
