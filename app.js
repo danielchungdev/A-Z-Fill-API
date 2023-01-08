@@ -49,9 +49,18 @@ app.get('/mostplayedposition', (req, res) => {
 	pool.query(`SELECT position, COUNT(position) as 'count' FROM matchhistory GROUP BY position ORDER BY 'count' DESC LIMIT 1`, (error, results, fields) => {
 		if (error) throw error
 		let data = results[0]
-		let returnObject = {
-			'position': numberToPosition(data.position),
-			'amountplayed': data.count
+		let returnObject;
+		if ( data != undefined){
+			returnObject = {
+				'position': numberToPosition(data.position),
+				'amountplayed': data.count
+			}
+		}
+		else{
+			returnObject = {
+				'position': "None",
+				'amountplayed': 0
+			}
 		}
 		res.send(returnObject)
 	})

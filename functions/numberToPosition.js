@@ -11,6 +11,8 @@ const positionSwitch = (n) => {
 			return "Bot"
 		case 5:
 			return "Support"
+		default:
+			return "None"
 	}
 }
 
