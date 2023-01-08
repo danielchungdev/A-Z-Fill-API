@@ -59,7 +59,7 @@ app.get('/mostplayedposition', (req, res) => {
 
 app.get('/champion/:championid', (req, res) => {
 	let championid = req.params.championid
-	pool.query(`SELECT * FROM matchhistory WHERE champion = '${championid}'`, (error, results, fields) => {
+	pool.query(`SELECT matchid, result, position, kills, deaths, assists, screenshot FROM matchhistory WHERE champion = '${championid}'`, (error, results, fields) => {
 		if (error) throw error
 		let data = results
 		let wins = 0;
@@ -76,7 +76,7 @@ app.get('/champion/:championid', (req, res) => {
 		let returnData = {
 			wins: wins,
 			loss: loss,
-			winrate: winrate,
+			winrate: Math.trunc(winrate),
 			matchhistory: data
 		}
 		res.send(returnData)
