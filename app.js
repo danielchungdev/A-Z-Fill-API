@@ -9,7 +9,7 @@ const positionToNumber = require('./functions/positionToNumber')
 const axios = require('axios')
 const determineResult = require('./functions/determineResult')
 
-app.use(cors({origin: 'https://a-z-fill-production.up.railway.app/'}));
+app.use(cors({origin: '*'}));
 app.use(bodyParser.json()); 
 
 app.get('/', (req, res) => {
